@@ -18,11 +18,10 @@ export default function ExpenseCategories() {
 
   const total = expenses.reduce((sum, t) => sum + t.amount, 0);
 
-  // group by category
-  const grouped = expenses.reduce((acc, t) => {
-    acc[t.category] = (acc[t.category] || 0) + t.amount;
-    return acc;
-  }, {} as Record<string, number>);
+const grouped = expenses.reduce<Record<string, number>>((acc, t) => {
+  acc[t.category] = (acc[t.category] || 0) + t.amount;
+  return acc;
+}, {});
 
   const categories = Object.entries(grouped).map(([name, value]) => ({
     name,
